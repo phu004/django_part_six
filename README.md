@@ -54,4 +54,21 @@ If you implement everything correctly up to this point, clicking on the "Edit" l
 ## 4. Add logic for the "Save" button
 When the user click on the "Save" button, the form will be submited to the current url using POST.  Then the Django's routing system will pass the request to the view function - "createPerson" in views.py.  Inside the view function,  complete the "if request.POST.get("save")" branch so that if the upi entered in the form belongs to one of the already created person objects, then update the the person object using the values from the form. 
 
+<details>
+  <summary>Click for solution</summary>
+  
+```sh
+            if request.POST.get("save"):
+                p = Person.objects.filter(upi=formData["upi"])
+                if p.count() == 1:
+                    p = Person.objects.get(upi=formData["upi"])
+                    p.name=formData["name"]
+                    p.isAdmin=formData["isAdmin"]
+                    p.save()
 
+                #A much more elegant way that does the same thing:      
+                #Person.objects.filter(upi=formData["upi"]).update(name=formData["name"],isAdmin=formData["isAdmin"])
+                
+                return HttpResponseRedirect("createPerson")
+```
+</details>
