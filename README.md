@@ -39,13 +39,12 @@ When the user click on the "Edit" link from the "Already Created" section, it wi
   <summary>Click for solution</summary>
   
 ```sh
-    def __init__(self, *args, **kwargs):
-        person = kwargs.pop('person', None)
-        super().__init__(*args, **kwargs)
-        
-        self.initial['name'] = person.name
-        self.initial['upi'] = person.upi
-        self.initial['isAdmin'] = person.isAdmin
+    if request.method == "GET":
+        upi = request.GET.get('upi', "")
+  
+        p = Person.objects.filter(upi=upi)
+        if(p.count() == 1):
+            form = CreatePerson(person = p[0])
 ```
 </details>
 
