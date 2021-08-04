@@ -22,7 +22,7 @@ To populate the form with data, we need to overwrite the form's constructor to i
   
 ```sh
     def __init__(self, *args, **kwargs):
-        person = kwargs.pop('person', None)
+        person = kwargs.pop('person', Person(name="", upi="", isAdmin=False))
         super().__init__(*args, **kwargs)
         
         self.initial['name'] = person.name
@@ -33,4 +33,19 @@ To populate the form with data, we need to overwrite the form's constructor to i
 
 <br/><br/>
 ## 3. Handle "Get" request from clicking the "Edit" link
-When the user click on the "Edit" link from the "Already Created" section, it will take the user back to "/main/createPerson" using "Get", also the upi of the person is attached to the url as a "Get" parameter. Edit the function "createPerson" in "views.py", complete the "if request.method == "GET" branch.
+When the user click on the "Edit" link from the "Already Created" section, it will take the user back to "/main/createPerson" using "Get", also the upi of the person is attached to the url as a parameter. Edit the function "createPerson" in "views.py", complete the "if request.method == "GET" branch. We want first find the person object with the upi equal to the upi parameter, then construct a "CreatePerson" form object using the person object.
+
+<details>
+  <summary>Click for solution</summary>
+  
+```sh
+    def __init__(self, *args, **kwargs):
+        person = kwargs.pop('person', None)
+        super().__init__(*args, **kwargs)
+        
+        self.initial['name'] = person.name
+        self.initial['upi'] = person.upi
+        self.initial['isAdmin'] = person.isAdmin
+```
+</details>
+
