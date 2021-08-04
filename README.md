@@ -58,15 +58,7 @@ When the user click on the "Save" button, the form will be submited to the curre
   <summary>Click for solution</summary>
   
 ```sh
-            if request.POST.get("save"):
-                p = Person.objects.filter(upi=formData["upi"])
-                if p.count() == 1:
-                    p = Person.objects.get(upi=formData["upi"])
-                    p.name=formData["name"]
-                    p.isAdmin=formData["isAdmin"]
-                    p.save()
-
-                #A much more elegant way that does the same thing:      
+            if request.POST.get("save"):   
                 #Person.objects.filter(upi=formData["upi"]).update(name=formData["name"],isAdmin=formData["isAdmin"])
                 
                 return HttpResponseRedirect("createPerson")
