@@ -48,4 +48,10 @@ When the user click on the "Edit" link from the "Already Created" section, it wi
 ```
 </details>
 
-If you implement everything correctly up to this point, clicking on the "Edit" link should populate the form with the data of the corresponding person detail.
+If you implement everything correctly up to this point, clicking on the "Edit" link should populate the form with the data with the corresponding person detail.
+
+<br/><br/>
+## 4. Add logic for the "Save" button
+When the user click on the "Save" button, the form will be submited to the current url using POST.  Then the Django's routing system will pass the request to the view function - "createPerson" in views.py.  Inside the view function,  complete the "if request.POST.get("save")" branch so that if the upi entered in the form belongs to one of the already created person objects, then update the the person object using the values from the form. 
+
+
