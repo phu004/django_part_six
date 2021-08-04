@@ -53,7 +53,7 @@ if request.method == "GET":
 ```
 </details>
 
-If you implement everything correctly up to this point, clicking on the "Edit" link should populate the form with the data with the corresponding person detail.
+If you implement everything correctly up to this point, clicking on the "Edit" link should populate the form with the detail of the corresponding person.
 
 <br/><br/>
 ## 4. Add logic for the "Save" button
