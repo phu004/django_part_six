@@ -21,15 +21,15 @@ To populate the form with data, we need to overwrite the form's constructor to i
   <summary>Click for solution</summary>
   
 ```sh
-    def __init__(self, *args, **kwargs):
-        person = kwargs.pop('person', Person(name="", upi="", isAdmin=False))
-        super().__init__(*args, **kwargs)
-  
-        #ToDo: You can assume that a Person object (under the name "person") will be passed into this constructor.
-        # Use the data in the Person object to initilize the fields of the form.      
-        self.initial['name'] = person.name
-        self.initial['upi'] = person.upi
-        self.initial['isAdmin'] = person.isAdmin
+def __init__(self, *args, **kwargs):
+    person = kwargs.pop('person', Person(name="", upi="", isAdmin=False))
+    super().__init__(*args, **kwargs)
+
+    #ToDo: You can assume that a Person object (under the name "person") will be passed into this constructor.
+    # Use the data in the Person object to initilize the fields of the form.      
+    self.initial['name'] = person.name
+    self.initial['upi'] = person.upi
+    self.initial['isAdmin'] = person.isAdmin
 ```
 </details>
 
@@ -41,15 +41,15 @@ When the user click on the "Edit" link from the "Already Created" section, it wi
   <summary>Click for solution</summary>
   
 ```sh
-    if request.method == "GET":
-        upi = request.GET.get('upi', "")
-  
-        #ToDo: Use the upi to find the corresponding person object in the database.
-        #If the person is found then create the form using the Person object.
-        #You can assume that every person in the database have a unique upi.
-        p = Person.objects.filter(upi=upi)
-        if p.count() == 1:
-            form = CreatePerson(person = p[0])
+if request.method == "GET":
+    upi = request.GET.get('upi', "")
+
+    #ToDo: Use the upi to find the corresponding person object in the database.
+    #If the person is found then create the form using the Person object.
+    #You can assume that every person in the database have a unique upi.
+    p = Person.objects.filter(upi=upi)
+    if p.count() == 1:
+        form = CreatePerson(person = p[0])
 ```
 </details>
 
@@ -63,12 +63,12 @@ When the user click on the "Save" button, the form will be submited to the curre
   <summary>Click for solution</summary>
   
 ```sh
-            if request.POST.get("save"): 
-  
-                #ToDo: If the upi entered in the form belongs to one of the already created person objects, 
-                #then update the the person object using the values from the form.
-                Person.objects.filter(upi=formData["upi"]).update(name=formData["name"],isAdmin=formData["isAdmin"])
-                
-                return HttpResponseRedirect("createPerson")
+if request.POST.get("save"): 
+
+    #ToDo: If the upi entered in the form belongs to one of the already created person objects, 
+    #then update the the person object using the values from the form.
+    Person.objects.filter(upi=formData["upi"]).update(name=formData["name"],isAdmin=formData["isAdmin"])
+
+    return HttpResponseRedirect("createPerson")
 ```
 </details>
