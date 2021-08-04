@@ -41,7 +41,9 @@ When the user click on the "Edit" link from the "Already Created" section, it wi
 ```sh
     if request.method == "GET":
         upi = request.GET.get('upi', "")
-  
+        #ToDo: Use the upi to find the corresponding person object in the database.
+        #If the person is found then create the form using the Person object.
+        #You can assume that every person in the database have a unique upi.
         p = Person.objects.filter(upi=upi)
         if p.count() == 1:
             form = CreatePerson(person = p[0])
@@ -58,8 +60,10 @@ When the user click on the "Save" button, the form will be submited to the curre
   <summary>Click for solution</summary>
   
 ```sh
-            if request.POST.get("save"):   
-                #Person.objects.filter(upi=formData["upi"]).update(name=formData["name"],isAdmin=formData["isAdmin"])
+            if request.POST.get("save"): 
+                #ToDo: If the upi entered in the form belongs to one of the already created person objects, 
+                #then update the the person object using the values from the form.
+                Person.objects.filter(upi=formData["upi"]).update(name=formData["name"],isAdmin=formData["isAdmin"])
                 
                 return HttpResponseRedirect("createPerson")
 ```
