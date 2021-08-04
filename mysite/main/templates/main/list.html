@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    {{ls.name}}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ls.name}}</h1>
+    <form method="POST" action="#">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="save" value="save">Save</button>
+        <input type="text" name="new">
+        <button type="submit" name="newItem" value="newItem">Add Item</button>
+    </form>
+{% endblock %}

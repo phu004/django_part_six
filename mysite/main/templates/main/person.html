@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{create_title}}{% endblock %}
+
+{% block content %}
+    <h1>{{create_title}}</h1>
+    <form method="POST" action="#">
+        {% csrf_token%}
+        {{form.as_p}}
+        <button type="submit" name="save" value="save">Save</button>
+        <button type="submit" name="create" value="create">Create New</button>
+    </form>
+    <br>
+    <b>Already Created:</b>
+    <br>
+    {% for entry in already_created %}
+        <a href="createPerson?upi={{entry.upi}}">Edit</a>&nbsp;&nbsp;{{entry.name}} ({{entry.upi}}) &nbsp;&nbsp;&nbsp;admin:&nbsp;{{entry.isAdmin}} <br>
+    {% endfor %}
+
+
+{% endblock %}

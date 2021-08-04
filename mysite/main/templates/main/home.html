@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+        My Home Page
+{% endblock %}
+
+{% block content %}
+        <h1>Welcome to my home page</h1>
+        <h3>My to do lists:</h3>
+            {% for todolist in list %}
+                    <form method="get" action="{{todolist.id}}">
+                        <button type="submit">Edit</button> {{todolist.name}}
+                    </form>
+            {% endfor %}
+{% endblock %}
