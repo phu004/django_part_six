@@ -14,7 +14,7 @@ workon dj && cd mysite
 ```
 <br/><br/>
 ## 2. Overwrite the constructor of the "CreatePerson" from class
-Start  the server and go to the path "/main/createPerson". Notice that a new "Save" button has been added to the form, and under the "Already Created" section an "Edit" link was added infront of each person entry. At the moment the "Save" button only submits an empty form no matter what you put in the fields, and the "Edit" link only redirect the user to the same page with the UPI parameter appended at the end of the url. The goal is to be populate the form with the person detail when the user click on the "Edit" link, and by clicking on the "Save" button, the corresponding person object is modified using the value from the fields of the form.
+Start  the server and go to the path "/main/createPerson". Notice that a "Save" button has been added to the form, and under the "Already Created" section an "Edit" link was added infront of each person entry. At the moment the "Save" button only submits an empty form no matter what you put in the fields, and the "Edit" link only redirect the user to the same page with the UPI parameter appended at the end of the url. The goal is to be populate the form with the person detail when the user click on the "Edit" link, and by clicking on the "Save" button, the corresponding person object is modified using the value from the fields of the form.
 
 To populate the form with data, we need to overwrite the form's constructor to initialize the fields. Open the file "forms.py" and complete the consturctor for "CreatePerson" class.
 <details>
@@ -43,7 +43,7 @@ When the user click on the "Edit" link from the "Already Created" section, it wi
         upi = request.GET.get('upi', "")
   
         p = Person.objects.filter(upi=upi)
-        if(p.count() == 1):
+        if p.count() == 1:
             form = CreatePerson(person = p[0])
 ```
 </details>
